@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"rsc.io/quote"
 )
@@ -21,8 +22,8 @@ func hello2() string {
 }
 
 func main() {
-	// port := os.Getenv("PORT")
-	port := "3000"
+	port := os.Getenv("PORT")
+	// port := "3000"
 	http.HandleFunc("/", hello)
 	http.HandleFunc("/test", test)
 	log.Print("Listening on :" + port)
