@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/KrysOlechowski/heroku1/middleware"
 	"rsc.io/quote"
@@ -22,8 +23,8 @@ func hello2() string {
 }
 
 func main() {
-	// port := os.Getenv("PORT")
-	port := "3000"
+	port := os.Getenv("PORT")
+	// port := "3000"
 	http.HandleFunc("/", hello)
 	http.HandleFunc("/test", middleware.GetAllTask)
 	log.Print("Listening on :" + port)
