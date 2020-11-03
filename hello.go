@@ -11,7 +11,7 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "HELLO WORLD")
+	io.WriteString(w, "HELLO WORLDxxxxxx")
 }
 
 // func test(w http.ResponseWriter, r *http.Request) {
