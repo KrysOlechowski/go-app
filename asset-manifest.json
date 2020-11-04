@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/KrysOlechowski/go-app/static/css/main.2fd86b6c.chunk.css",
-    "main.js": "/KrysOlechowski/go-app/static/js/main.add502fc.chunk.js",
-    "main.js.map": "/KrysOlechowski/go-app/static/js/main.add502fc.chunk.js.map",
-    "runtime-main.js": "/KrysOlechowski/go-app/static/js/runtime-main.8c67f326.js",
-    "runtime-main.js.map": "/KrysOlechowski/go-app/static/js/runtime-main.8c67f326.js.map",
-    "static/js/2.5f45ca54.chunk.js": "/KrysOlechowski/go-app/static/js/2.5f45ca54.chunk.js",
-    "static/js/2.5f45ca54.chunk.js.map": "/KrysOlechowski/go-app/static/js/2.5f45ca54.chunk.js.map",
-    "static/js/3.f5fed57b.chunk.js": "/KrysOlechowski/go-app/static/js/3.f5fed57b.chunk.js",
-    "static/js/3.f5fed57b.chunk.js.map": "/KrysOlechowski/go-app/static/js/3.f5fed57b.chunk.js.map",
-    "index.html": "/KrysOlechowski/go-app/index.html",
-    "static/css/main.2fd86b6c.chunk.css.map": "/KrysOlechowski/go-app/static/css/main.2fd86b6c.chunk.css.map",
-    "static/js/2.5f45ca54.chunk.js.LICENSE.txt": "/KrysOlechowski/go-app/static/js/2.5f45ca54.chunk.js.LICENSE.txt"
+    "main.css": "/krysolechowski/go-app/static/css/main.2fd86b6c.chunk.css",
+    "main.js": "/krysolechowski/go-app/static/js/main.add502fc.chunk.js",
+    "main.js.map": "/krysolechowski/go-app/static/js/main.add502fc.chunk.js.map",
+    "runtime-main.js": "/krysolechowski/go-app/static/js/runtime-main.8c8a7512.js",
+    "runtime-main.js.map": "/krysolechowski/go-app/static/js/runtime-main.8c8a7512.js.map",
+    "static/js/2.5f45ca54.chunk.js": "/krysolechowski/go-app/static/js/2.5f45ca54.chunk.js",
+    "static/js/2.5f45ca54.chunk.js.map": "/krysolechowski/go-app/static/js/2.5f45ca54.chunk.js.map",
+    "static/js/3.f5fed57b.chunk.js": "/krysolechowski/go-app/static/js/3.f5fed57b.chunk.js",
+    "static/js/3.f5fed57b.chunk.js.map": "/krysolechowski/go-app/static/js/3.f5fed57b.chunk.js.map",
+    "index.html": "/krysolechowski/go-app/index.html",
+    "static/css/main.2fd86b6c.chunk.css.map": "/krysolechowski/go-app/static/css/main.2fd86b6c.chunk.css.map",
+    "static/js/2.5f45ca54.chunk.js.LICENSE.txt": "/krysolechowski/go-app/static/js/2.5f45ca54.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.8c67f326.js",
+    "static/js/runtime-main.8c8a7512.js",
     "static/js/2.5f45ca54.chunk.js",
     "static/css/main.2fd86b6c.chunk.css",
     "static/js/main.add502fc.chunk.js"
