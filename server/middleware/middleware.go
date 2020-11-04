@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/KrysOlechowski/heroku1/models"
+	"github.com/KrysOlechowski/heroku1/server/models"
 	"github.com/gorilla/mux"
 
 	"go.mongodb.org/mongo-driver/bson"

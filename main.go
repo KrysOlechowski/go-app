@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/KrysOlechowski/heroku1/router"
+	"github.com/KrysOlechowski/heroku1/server/router"
 )
 
 // func hello(w http.ResponseWriter, r *http.Request) {
@@ -22,13 +22,12 @@ import (
 // }
 
 func main() {
+
 	port := os.Getenv("PORT")
-	// port := "3000"
-	// http.HandleFunc("/", hello)
-	// http.HandleFunc("/test", middleware.GetAllTask)
-	// log.Print("Listening on :" + port)
-	// log.Fatal(http.ListenAndServe(":"+port, nil))
+	if port == "" {
+		port = "3000" // Default port if not specified
+	}
 	r := router.Router()
-	fmt.Println("Starting server on the port 8080...")
+	fmt.Println("Starting server on the port 3000...")
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }

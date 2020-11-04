@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/KrysOlechowski/heroku1/middleware"
+	"github.com/KrysOlechowski/heroku1/server/middleware"
 	"github.com/gorilla/mux"
 )
 
