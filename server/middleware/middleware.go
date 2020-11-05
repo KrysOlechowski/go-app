@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/KrysOlechowski/heroku1/secret"
 	"github.com/KrysOlechowski/heroku1/server/models"
 	"github.com/gorilla/mux"
 
@@ -19,7 +20,7 @@ import (
 // DB connection string
 // for localhost mongoDB
 // const connectionString = "mongodb://localhost:27017"
-const connectionString = "mongodb+srv://projecttest:projectpass@cluster0.quzdq.mongodb.net/test?retryWrites=true&w=majority"
+const connectionString = secret.MongoDBConnectionString
 
 // Database Name
 const dbName = "test"
