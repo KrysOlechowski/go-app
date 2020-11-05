@@ -28,6 +28,6 @@ func main() {
 		port = "3000" // Default port if not specified
 	}
 	r := router.Router()
-	fmt.Println("Starting server on the port 3000...")
+	fmt.Println("Starting server on the port" + port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }

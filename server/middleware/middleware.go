@@ -17,15 +17,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// DB connection string
-// for localhost mongoDB
-// const connectionString = "mongodb://localhost:27017"
-
-// var lol string = os.Getenv("MONGO_CONNECTION_STRING")
-
-// if mongoDBConnectionString ==""{
-// 	mongoDBConnectionString=	"mongodb://localhost:27017"
-// }
 var connection = os.Getenv("MONGO_CONNECTION_STRING")
 
 var connectionString = connection
