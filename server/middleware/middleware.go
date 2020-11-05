@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/KrysOlechowski/heroku1/secret"
 	"github.com/KrysOlechowski/heroku1/server/models"
 	"github.com/gorilla/mux"
 
@@ -20,7 +20,15 @@ import (
 // DB connection string
 // for localhost mongoDB
 // const connectionString = "mongodb://localhost:27017"
-const connectionString = secret.MongoDBConnectionString
+
+// var lol string = os.Getenv("MONGO_CONNECTION_STRING")
+
+// if mongoDBConnectionString ==""{
+// 	mongoDBConnectionString=	"mongodb://localhost:27017"
+// }
+var connection = os.Getenv("MONGO_CONNECTION_STRING")
+
+var connectionString = connection
 
 // Database Name
 const dbName = "test"
