@@ -24,10 +24,8 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3000" // Default port if not specified
-	}
+
 	r := router.Router()
-	fmt.Println("Starting server on the port" + port)
+	fmt.Println("Starting server on the port 5000")
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }
