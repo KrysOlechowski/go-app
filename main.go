@@ -16,8 +16,11 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
 
 	r := router.Router()
-	fmt.Println("Starting server on the port 5000")
+	fmt.Println("Starting server on the port " + port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }
