@@ -17,7 +17,7 @@ import (
 // 	io.WriteString(w, "HELLO TEST")
 // }
 
-//  func    hello2() string {
+//  func     hello2() string {
 // 	return quote.Hello()
 // }
 
