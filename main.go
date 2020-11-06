@@ -9,16 +9,8 @@ import (
 	"github.com/KrysOlechowski/heroku1/server/router"
 )
 
-// func hello(w http.ResponseWriter, r *http.Request) {
-// 	io.WriteString(w, "HELLO WORLDxxxxxx")
-// }
-
 // func test(w http.ResponseWriter, r *http.Request) {
 // 	io.WriteString(w, "HELLO TEST")
-// }
-
-//  func     hello2() string {
-// 	return quote.Hello()
 // }
 
 func main() {
