@@ -1,36 +1,67 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { moveWholeBlocksToRight } from "../../logic/blocks-logic";
-import styled from "styled-components";
+import styled from "styled-components/macro";
+
 type Props = {};
 
 export const Game: FC<Props> = () => {
-  const wholeGameGrid = [
-    [{ value: 2 }, { value: 0 }, { value: 0 }, { value: 2 }],
-    [{ value: 4 }, { value: 4 }, { value: 2 }, { value: 2 }],
-    [{ value: 0 }, { value: 4 }, { value: 0 }, { value: 4 }],
-    [{ value: 0 }, { value: 0 }, { value: 4 }, { value: 4 }],
-  ];
+  const [gameGrid, setGameGrid] = useState([
+    [
+      { value: 2, active: false },
+      { value: 2, active: false },
+      { value: 2, active: false },
+      { value: 2, active: false },
+    ],
+    [
+      { value: 4, active: false },
+      { value: 4, active: false },
+      { value: 2, active: false },
+      { value: 2, active: false },
+    ],
+    [
+      { value: 0, active: false },
+      { value: 4, active: false },
+      { value: 0, active: false },
+      { value: 4, active: false },
+    ],
+    [
+      { value: 0, active: false },
+      { value: 0, active: false },
+      { value: 4, active: false },
+      { value: 4, active: false },
+    ],
+  ]);
 
-  const movedWholeGrid = moveWholeBlocksToRight(wholeGameGrid);
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      onKeyPressed(e.key);
+    });
+    return () => {
+      console.log("unmount");
+    };
+  }, []);
 
-  console.log(movedWholeGrid);
+  const onKeyPressed = (key: string) => {
+    console.log(key);
 
-  const render = movedWholeGrid.map((row) => {
-    return (
-      <Row>
-        {row.map((el) => {
-          console.log(el);
-          return <Block>{el.value}</Block>;
-        })}
-      </Row>
-    );
-  });
+    const grid = moveWholeBlocksToRight(gameGrid, key);
+    setGameGrid(grid);
+  };
 
   return (
     <>
       <h1>Game Component</h1>
       <div style={{ border: "1px solid red", width: "500px", height: "500px" }}>
-        {render}
+        {gameGrid.map((row) => {
+          return (
+            <Row>
+              {row.map((el) => {
+                console.log(el);
+                return <Block>{el.value}</Block>;
+              })}
+            </Row>
+          );
+        })}
       </div>
     </>
   );
@@ -46,4 +77,8 @@ const Block = styled.div`
   width: 125px;
   height: 125px;
   border: 1px solid green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
 `;
