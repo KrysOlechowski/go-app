@@ -4,9 +4,9 @@ import React, { FC } from "react";
 type Props = {};
 
 export const Main: FC<Props> = () => {
-  const tasks = fetch("http://localhost:3000/test")
+  const tasks = fetch("http://localhost:5000/test")
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => null);
   return (
     <>
       <h1>Main Component</h1>
