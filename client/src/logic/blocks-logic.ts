@@ -2,22 +2,19 @@
 
 
 export const moveWholeBlocksToRight=(row:any,key:string)=>{
-  console.log(key)
    const newWholeArray=[]
 for(let k=0;k<4;k++){
 
    for (let i = row.length - 1; i >= 0; i--) {
       for (let j = i - 1; j >= 0; j--) {
-        row[k][i].active=false
+        row[k][j].active="old"
         if (row[k][i].value !== 0) {
           
           if (row[k][j].value > 0 && row[k][j].value !== row[k][i].value) {
-            console.log("%c%s", "color: #ff0000", "mamy przeszkode");
             break;
           } else if (row[k][i].value === row[k][j].value) {
-            console.log("%c%s", "color: #ff0000", "mamy pare");
             row[k][i].value = row[k][i].value + row[k][j].value;
-            row[k][i].active=true
+            row[k][i].active="combined"
             row[k][j].value = 0;
             break;
           }
@@ -40,3 +37,15 @@ for(let k=0;k<4;k++){
   return newWholeArray
 }
 
+
+export const checkIfBlockMoved = (oldGrid: any, newGrid: any) => {
+  let moved = false;
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (oldGrid[i][j].value !== newGrid[i][j].value) {
+        moved = true;
+      }
+    }
+  }
+  return moved;
+}
