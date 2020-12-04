@@ -39,10 +39,10 @@ export const Game: FC<Props> = () => {
   const onKeyPressed = useCallback(
     (e) => {
       const oldGrid = _.cloneDeep(gameGrid);
-
-      const grid = moveWholeBlocksToRight(gameGrid, e.key);
+      const copiedGrid = _.cloneDeep(gameGrid);
+      const grid = moveWholeBlocksToRight(copiedGrid, e.key);
       const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
-      const withRandom = addRandomBlocks(grid);
+      const withRandom = checkIfMoved && addRandomBlocks(grid);
       console.log(withRandom);
       console.log(checkIfMoved);
       checkIfMoved && setGameGrid(withRandom);

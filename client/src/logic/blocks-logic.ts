@@ -2,12 +2,16 @@
 
 
 export const moveWholeBlocksToRight=(row:any,key:string)=>{
+  let lol=0
    const newWholeArray=[]
 for(let k=0;k<4;k++){
 
    for (let i = row.length - 1; i >= 0; i--) {
+    row[k][i].active="old"
       for (let j = i - 1; j >= 0; j--) {
-        row[k][j].active="old"
+        
+        console.log("k :"+k+"i :"+i)
+        lol++
         if (row[k][i].value !== 0) {
           
           if (row[k][j].value > 0 && row[k][j].value !== row[k][i].value) {
@@ -34,6 +38,7 @@ for(let k=0;k<4;k++){
       newArray.push(...blocksWithoutValues, ...blockWithValues);
       newWholeArray.push(newArray)
 }
+
   return newWholeArray
 }
 
