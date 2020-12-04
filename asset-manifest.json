@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/go-app/static/css/main.2fd86b6c.chunk.css",
-    "main.js": "/go-app/static/js/main.26e94ce5.chunk.js",
-    "main.js.map": "/go-app/static/js/main.26e94ce5.chunk.js.map",
-    "runtime-main.js": "/go-app/static/js/runtime-main.c8b48524.js",
-    "runtime-main.js.map": "/go-app/static/js/runtime-main.c8b48524.js.map",
-    "static/js/2.fdca23c6.chunk.js": "/go-app/static/js/2.fdca23c6.chunk.js",
-    "static/js/2.fdca23c6.chunk.js.map": "/go-app/static/js/2.fdca23c6.chunk.js.map",
-    "static/js/3.f5fed57b.chunk.js": "/go-app/static/js/3.f5fed57b.chunk.js",
-    "static/js/3.f5fed57b.chunk.js.map": "/go-app/static/js/3.f5fed57b.chunk.js.map",
+    "main.js": "/go-app/static/js/main.7907cecf.chunk.js",
+    "main.js.map": "/go-app/static/js/main.7907cecf.chunk.js.map",
+    "runtime-main.js": "/go-app/static/js/runtime-main.c40dc7e1.js",
+    "runtime-main.js.map": "/go-app/static/js/runtime-main.c40dc7e1.js.map",
+    "static/js/2.06b68f6c.chunk.js": "/go-app/static/js/2.06b68f6c.chunk.js",
+    "static/js/2.06b68f6c.chunk.js.map": "/go-app/static/js/2.06b68f6c.chunk.js.map",
+    "static/js/3.7c1afe95.chunk.js": "/go-app/static/js/3.7c1afe95.chunk.js",
+    "static/js/3.7c1afe95.chunk.js.map": "/go-app/static/js/3.7c1afe95.chunk.js.map",
     "index.html": "/go-app/index.html",
     "static/css/main.2fd86b6c.chunk.css.map": "/go-app/static/css/main.2fd86b6c.chunk.css.map",
-    "static/js/2.fdca23c6.chunk.js.LICENSE.txt": "/go-app/static/js/2.fdca23c6.chunk.js.LICENSE.txt"
+    "static/js/2.06b68f6c.chunk.js.LICENSE.txt": "/go-app/static/js/2.06b68f6c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c8b48524.js",
-    "static/js/2.fdca23c6.chunk.js",
+    "static/js/runtime-main.c40dc7e1.js",
+    "static/js/2.06b68f6c.chunk.js",
     "static/css/main.2fd86b6c.chunk.css",
-    "static/js/main.26e94ce5.chunk.js"
+    "static/js/main.7907cecf.chunk.js"
   ]
 }
