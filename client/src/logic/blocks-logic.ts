@@ -2,7 +2,6 @@
 
 
 export const moveWholeBlocksToRight=(row:any,key:string)=>{
-  let lol=0
    const newWholeArray=[]
 for(let k=0;k<4;k++){
 
@@ -10,8 +9,6 @@ for(let k=0;k<4;k++){
     row[k][i].active="old"
       for (let j = i - 1; j >= 0; j--) {
         
-        console.log("k :"+k+"i :"+i)
-        lol++
         if (row[k][i].value !== 0) {
           
           if (row[k][j].value > 0 && row[k][j].value !== row[k][i].value) {

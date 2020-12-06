@@ -8,13 +8,15 @@ import * as _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 type Props = {};
 
+//? [TODO] separate functions for each key press?
+
 export const Game: FC<Props> = () => {
   const [gameGrid, setGameGrid] = useState([
     [
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
+      { value: 1, active: "old" },
+      { value: 2, active: "old" },
+      { value: 3, active: "old" },
+      { value: 4, active: "old" },
     ],
     [
       { value: 2, active: "old" },
@@ -36,19 +38,81 @@ export const Game: FC<Props> = () => {
     ],
   ]);
 
-  const onKeyPressed = useCallback(
-    (e) => {
+  const moveBlocksToRight = (e: any) => {
+    return new Promise((resolve, reject) => {
       const oldGrid = _.cloneDeep(gameGrid);
       const copiedGrid = _.cloneDeep(gameGrid);
       const grid = moveWholeBlocksToRight(copiedGrid, e.key);
       const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
       const withRandom = checkIfMoved && addRandomBlocks(grid);
-      console.log(withRandom);
-      console.log(checkIfMoved);
-      checkIfMoved && setGameGrid(withRandom);
+
+      if (checkIfMoved) {
+        resolve(withRandom);
+      } else {
+        reject("no move");
+      }
+    });
+  };
+
+  const moveBlocksToLeft = (e: any) => {
+    return new Promise((resolve, reject) => {
+      const oldGrid = _.cloneDeep(gameGrid);
+      const copiedGrid = _.cloneDeep(gameGrid);
+      for (let i = 0; i < 4; i++) {
+        oldGrid[i] = oldGrid[i].reverse();
+        copiedGrid[i] = copiedGrid[i].reverse();
+      }
+      const grid = moveWholeBlocksToRight(copiedGrid, e.key);
+      const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
+
+      let withRandom = [];
+      if (checkIfMoved) {
+        withRandom = addRandomBlocks(grid);
+        for (let i = 0; i < 4; i++) {
+          withRandom[i] = withRandom[i].reverse();
+        }
+      }
+
+      if (checkIfMoved) {
+        resolve(withRandom);
+      } else {
+        reject("no move");
+      }
+    });
+  };
+
+  const onKeyPressed = useCallback(
+    (e) => {
+      if (e.key === "ArrowRight") {
+        moveBlocksToRight(e)
+          .then((grid: any) => {
+            setGameGrid(grid);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else if (e.key === "ArrowLeft") {
+        moveBlocksToLeft(e)
+          .then((grid: any) => {
+            setGameGrid(grid);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
     [gameGrid]
   );
+
+  const reverseGrid = () => {
+    const copiedGrid = _.cloneDeep(gameGrid);
+    for (let i = 0; i < 4; i++) {
+      const reversedRow = copiedGrid[i].reverse();
+      console.log("reversed :");
+      console.log(reversedRow);
+    }
+    console.log(copiedGrid);
+  };
 
   useEffect(() => {
     const copiedGrid = _.cloneDeep(gameGrid);
@@ -57,7 +121,6 @@ export const Game: FC<Props> = () => {
   }, []);
 
   const addRandomBlocks = (grid: any) => {
-    console.log("%c%s", "color: #aa00ff", "addRandom :");
     const arrayOfEmptyBlocks = [];
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
@@ -77,7 +140,6 @@ export const Game: FC<Props> = () => {
       active: "new",
     };
 
-    console.log(randomEmptyBlock);
     return grid;
   };
 
