@@ -11,7 +11,10 @@ export const combineBlocks=(key:string,gameGrid:any)=>{
 setTimeout(() => {
   if(key==="ArrowRight"){
     grid = moveWholeBlocksToRight(currGrid)
-    console.log(grid)
+    console.log("right")
+}else if(key==="ArrowLeft"){
+  grid=moveBlocksToLeft(currGrid)
+  console.log("left")
 }
 
 
@@ -24,11 +27,27 @@ if(isBlocksMoved){
 }else{
   return reject("noMove")
 }
-}, 5000);
+}, 100);
   
 
     })
 
+}
+
+const moveBlocksToLeft=(grid:any)=>{
+let copiedGrid= _.cloneDeep(grid);
+copiedGrid =reverseGrid(copiedGrid)
+copiedGrid=moveWholeBlocksToRight(copiedGrid)
+copiedGrid=reverseGrid(copiedGrid)
+return copiedGrid
+}
+
+const reverseGrid=(grid:any)=>{
+  let copiedGrid = _.cloneDeep(grid);
+  for(let i=0;i<4;i++){
+    copiedGrid[i]=copiedGrid[i].reverse()
+  }
+  return copiedGrid
 }
 
 

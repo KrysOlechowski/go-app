@@ -33,10 +33,10 @@ export const Game: FC<Props> = () => {
       { value: 4, active: "old" },
     ],
     [
-      { value: 1, active: "old" },
-      { value: 2, active: "old" },
-      { value: 3, active: "old" },
-      { value: 4, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
     ],
   ]);
 
@@ -126,9 +126,10 @@ export const Game: FC<Props> = () => {
       if (!isLoading) {
         const newGrid = combineBlocks(e.key, gameGrid)
           .then((grid: any) => {
-            console.log("we have a move");
+            console.log("we have a move + grid :");
             console.log(grid);
-            setGameGrid(grid);
+            const withRandom = addRandomBlocks(grid);
+            setGameGrid(withRandom);
             setIsLoading(false);
           })
           .catch((err) => {
