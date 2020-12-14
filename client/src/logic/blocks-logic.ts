@@ -1,7 +1,38 @@
+import * as _ from "lodash";
 
 
+export const combineBlocks=(key:string,gameGrid:any)=>{
 
-export const moveWholeBlocksToRight=(row:any,key:string)=>{
+      const prevGrid = _.cloneDeep(gameGrid);
+      const currGrid = _.cloneDeep(gameGrid);
+      let grid: any[][]=[]
+    return new Promise((resolve,reject)=>{
+
+setTimeout(() => {
+  if(key==="ArrowRight"){
+    grid = moveWholeBlocksToRight(currGrid)
+    console.log(grid)
+}
+
+
+const isBlocksMoved = checkIfBlockMoved(prevGrid,grid)
+console.log(isBlocksMoved)
+
+
+if(isBlocksMoved){
+  return resolve(grid)
+}else{
+  return reject("noMove")
+}
+}, 5000);
+  
+
+    })
+
+}
+
+
+export const moveWholeBlocksToRight=(row:any)=>{
    const newWholeArray=[]
 for(let k=0;k<4;k++){
 
@@ -38,6 +69,8 @@ for(let k=0;k<4;k++){
 
   return newWholeArray
 }
+
+
 
 
 export const checkIfBlockMoved = (oldGrid: any, newGrid: any) => {
