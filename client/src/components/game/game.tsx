@@ -1,9 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import {
-  moveWholeBlocksToRight,
-  checkIfBlockMoved,
-  combineBlocks,
-} from "../../logic/blocks-logic";
+import { combineBlocks, addRandomBlocks } from "../../logic/blocks-logic";
 import styled from "styled-components/macro";
 import * as _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
@@ -16,113 +12,32 @@ export const Game: FC<Props> = () => {
   const [gameGrid, setGameGrid] = useState([
     [
       { value: 1, active: "old" },
-      { value: 1, active: "old" },
-      { value: 3, active: "old" },
-      { value: 4, active: "old" },
-    ],
-    [
-      { value: 1, active: "old" },
-      { value: 2, active: "old" },
-      { value: 3, active: "old" },
-      { value: 4, active: "old" },
-    ],
-    [
-      { value: 1, active: "old" },
-      { value: 2, active: "old" },
-      { value: 3, active: "old" },
-      { value: 4, active: "old" },
-    ],
-    [
       { value: 0, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+    ],
+    [
+      { value: 1, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+    ],
+    [
+      { value: 2, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+      { value: 0, active: "old" },
+    ],
+    [
+      { value: 2, active: "old" },
       { value: 0, active: "old" },
       { value: 0, active: "old" },
       { value: 0, active: "old" },
     ],
   ]);
 
-  // const moveBlocksToRight = (e: any) => {
-  // return new Promise((resolve, reject) => {
-  // const oldGrid = _.cloneDeep(gameGrid);
-  // const copiedGrid = _.cloneDeep(gameGrid);
-  // const grid = moveWholeBlocksToRight(copiedGrid, e.key);
-  // const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
-  // const withRandom = checkIfMoved && addRandomBlocks(grid);
-
-  // if (checkIfMoved) {
-  // resolve(withRandom);
-  // } else {
-  // reject("no move");
-  // }
-  // });
-  // };
-
-  const moveBlocksUp = () => {
-    return new Promise((resolve, reject) => {
-      let oldGrid = _.cloneDeep(gameGrid);
-      let copiedGrid = _.cloneDeep(gameGrid);
-
-      for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-          console.log(oldGrid[j][i]);
-          oldGrid[i][j] = oldGrid[j][i];
-          copiedGrid[i][j] = copiedGrid[j][i];
-        }
-      }
-      // console.log(copiedGrid);
-      const grid = moveWholeBlocksToRight(copiedGrid);
-      // console.log(grid);
-      const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
-      let withRandom = [];
-
-      if (checkIfMoved) {
-        withRandom = addRandomBlocks(grid);
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 4; j++) {
-            // console.log(oldGrid[j][i]);
-            withRandom[j][i] = withRandom[i][j];
-          }
-        }
-      }
-
-      if (checkIfMoved) {
-        resolve(withRandom);
-      } else {
-        reject("no move");
-      }
-    });
-  };
-
-  const moveBlocksToLeft = (e: any) => {
-    return new Promise((resolve, reject) => {
-      const oldGrid = _.cloneDeep(gameGrid);
-      const copiedGrid = _.cloneDeep(gameGrid);
-      for (let i = 0; i < 4; i++) {
-        oldGrid[i] = oldGrid[i].reverse();
-        copiedGrid[i] = copiedGrid[i].reverse();
-      }
-      const grid = moveWholeBlocksToRight(copiedGrid);
-      const checkIfMoved = checkIfBlockMoved(oldGrid, grid);
-
-      let withRandom = [];
-      if (checkIfMoved) {
-        withRandom = addRandomBlocks(grid);
-        for (let i = 0; i < 4; i++) {
-          withRandom[i] = withRandom[i].reverse();
-        }
-      }
-
-      if (checkIfMoved) {
-        resolve(withRandom);
-      } else {
-        reject("no move");
-      }
-    });
-  };
-
   const onKeyPressed = useCallback(
     (e) => {
-      setIsLoading(true);
-
       if (!isLoading) {
         const newGrid = combineBlocks(e.key, gameGrid)
           .then((grid: any) => {
@@ -137,67 +52,17 @@ export const Game: FC<Props> = () => {
             setIsLoading(false);
           });
       }
-
-      // if (e.key === "ArrowRight") {
-      //   moveBlocksToRight(e)
-      //     .then((grid: any) => {
-      //       setGameGrid(grid);
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      // } else if (e.key === "ArrowLeft") {
-      //   moveBlocksToLeft(e)
-      //     .then((grid: any) => {
-      //       setGameGrid(grid);
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      // } else if (e.key === "ArrowUp") {
-      //   moveBlocksUp()
-      //     .then((grid: any) => {
-      //       setGameGrid(grid);
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      // }
+      setIsLoading(true);
     },
-    [gameGrid, combineBlocks, isLoading]
+    [gameGrid, combineBlocks, isLoading, addRandomBlocks]
   );
 
   useEffect(() => {
     const copiedGrid = _.cloneDeep(gameGrid);
-    const withRandom = addRandomBlocks(copiedGrid);
+    const withRandom = copiedGrid;
+    // const withRandom = addRandomBlocks(copiedGrid);
     setGameGrid(withRandom);
   }, []);
-
-  const addRandomBlocks = (grid: any) => {
-    const arrayOfEmptyBlocks = [];
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        if (grid[i][j].value === 0) {
-          arrayOfEmptyBlocks.push({
-            row: i,
-            index: j,
-          });
-        }
-      }
-    }
-    const numberOfEmptyBlocks = arrayOfEmptyBlocks.length;
-    if (numberOfEmptyBlocks === 0) {
-      return grid;
-    }
-    const randomNumber = Math.floor(Math.random() * numberOfEmptyBlocks);
-    const randomEmptyBlock = arrayOfEmptyBlocks[randomNumber];
-    grid[randomEmptyBlock.row][randomEmptyBlock.index] = {
-      value: 2,
-      active: "new",
-    };
-
-    return grid;
-  };
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPressed);
