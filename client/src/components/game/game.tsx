@@ -5,34 +5,209 @@ import * as _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 type Props = {};
 
-//? [TODO] separate functions for each key press?
-
 export const Game: FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(false);
+  //todo: nie działa bez konkretnych wartości dla new position.
   const [gameGrid, setGameGrid] = useState([
     [
-      { value: 1, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
+      {
+        value: 2,
+        active: "old",
+        position: {
+          x: 0,
+          y: 0,
+        },
+        newPosition: {
+          x: 0,
+          y: 0,
+        },
+      },
+      {
+        value: 2,
+        active: "old",
+        position: {
+          x: 0,
+          y: 1,
+        },
+        newPosition: {
+          x: 0,
+          y: 1,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 0,
+          y: 2,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 0,
+          y: 3,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
     ],
     [
-      { value: 1, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 1,
+          y: 0,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 1,
+          y: 1,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 1,
+          y: 2,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 1,
+          y: 3,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
     ],
     [
-      { value: 2, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 2,
+          y: 0,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 2,
+          y: 1,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 2,
+          y: 2,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 2,
+          y: 3,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
     ],
     [
-      { value: 2, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
-      { value: 0, active: "old" },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 3,
+          y: 0,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 3,
+          y: 1,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 3,
+          y: 2,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
+      {
+        value: 0,
+        active: "old",
+        position: {
+          x: 3,
+          y: 3,
+        },
+        newPosition: {
+          x: null,
+          y: null,
+        },
+      },
     ],
   ]);
 
@@ -43,7 +218,8 @@ export const Game: FC<Props> = () => {
           .then((grid: any) => {
             console.log("we have a move + grid :");
             console.log(grid);
-            const withRandom = addRandomBlocks(grid);
+            // const withRandom = addRandomBlocks(grid);
+            const withRandom = grid;
             setGameGrid(withRandom);
             setIsLoading(false);
           })
@@ -84,7 +260,15 @@ export const Game: FC<Props> = () => {
               {row.map((el, i) => {
                 return (
                   <Block key={uuidv4()} active={el.active}>
-                    {el.value}
+                    <div className="value">{el.value}</div>
+                    <div className="position">
+                      <div style={{ fontSize: "11px" }}>prev position :</div>X :{" "}
+                      {el.position?.x}, Y : {el.position?.y}
+                    </div>
+                    <div className="position">
+                      <div style={{ fontSize: "11px" }}>new position :</div>X :{" "}
+                      {el.newPosition?.x}, Y : {el.newPosition?.y}
+                    </div>
                   </Block>
                 );
               })}
@@ -106,6 +290,8 @@ interface BlockInterface {
 }
 
 const Block = styled.div<BlockInterface>`
+  display: flex;
+  flex-direction: column;
   color: black;
   box-sizing: border-box;
   width: 125px;
@@ -126,4 +312,12 @@ const Block = styled.div<BlockInterface>`
     `
     background-color:blue;
   `}
+
+  .value {
+    font-size: 36px;
+  }
+
+  .position {
+    font-size: 16px;
+  }
 `;

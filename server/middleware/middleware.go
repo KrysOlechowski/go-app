@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/KrysOlechowski/heroku1/server/models"
 	"github.com/gorilla/mux"
@@ -17,9 +16,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var connection = os.Getenv("MONGO_CONNECTION_STRING")
+// var connection = os.Getenv("MONGO_CONNECTION_STRING")
 
-var connectionString = connection
+var connectionString = "mongodb+srv://projecttest:projectpass@cluster0.quzdq.mongodb.net/test?retryWrites=true&w=majority"
 
 // Database Name
 const dbName = "test"

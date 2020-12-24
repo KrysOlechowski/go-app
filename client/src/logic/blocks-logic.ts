@@ -2,10 +2,11 @@ import * as _ from "lodash";
 
 export const combineBlocks = (key: string, gameGrid: any) => {
   const prevGrid = _.cloneDeep(gameGrid);
-  const currGrid = _.cloneDeep(gameGrid);
+  let currGrid = _.cloneDeep(gameGrid);
   let grid: any[][] = [];
   return new Promise((resolve, reject) => {
     setTimeout(() => {
+      currGrid = setPrevPositions(currGrid);
       if (key === "ArrowRight") {
         grid = moveWholeBlocksToRight(currGrid);
         console.log("right");
@@ -24,6 +25,7 @@ export const combineBlocks = (key: string, gameGrid: any) => {
       console.log(isBlocksMoved);
 
       if (isBlocksMoved) {
+        grid = setNewPositions(grid);
         return resolve(grid);
       } else {
         return reject("noMove");
@@ -61,48 +63,89 @@ const moveBlocksDown = (gameGrid: any) => {
   let grid: any = [[], [], [], []];
 
   grid = rotateGridToLeft(copiedGrid);
-  console.log("rotateGridToLeft");
-  console.log(grid);
+
   grid = moveWholeBlocksToRight(grid);
-  console.log("moveWholeBlocksToRight");
-  console.log(grid);
 
   grid = rotateGridToRight(grid);
-  console.log("rotateGridToRight");
-  console.log(grid);
 
   return grid;
 };
 
-export const moveWholeBlocksToRight = (row: any) => {
-  const newWholeArray = [];
+const setPrevPositions = (gameGrid: any) => {
+  const copiedGrid: any = _.cloneDeep(gameGrid);
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (copiedGrid[i][j].value > 0) {
+        copiedGrid[i][j].position.x = copiedGrid[i][j].newPosition.x;
+        copiedGrid[i][j].position.y = copiedGrid[i][j].newPosition.y;
+      }
+    }
+  }
+  return copiedGrid;
+};
+
+const setNewPositions = (grid: any) => {
+  const copiedGrid: any = _.cloneDeep(grid);
+
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (copiedGrid[i][j].value > 0) {
+        copiedGrid[i][j].newPosition.x = i;
+        copiedGrid[i][j].newPosition.y = j;
+      }
+    }
+  }
+
+  return copiedGrid;
+};
+//left here ->newPosition and old position is kind of working but be careful about the addRandomFunc:
+export const moveWholeBlocksToRight = (grid: any) => {
+  const copiedGrid: any = _.cloneDeep(grid);
+  let newWholeArray = [];
   for (let k = 0; k < 4; k++) {
-    for (let i = row.length - 1; i >= 0; i--) {
-      row[k][i].active = "old";
+    for (let i = copiedGrid.length - 1; i >= 0; i--) {
+      copiedGrid[k][i].active = "old";
       for (let j = i - 1; j >= 0; j--) {
-        if (row[k][i].value !== 0) {
-          if (row[k][j].value > 0 && row[k][j].value !== row[k][i].value) {
+        // console.log("k : " + k + ", i : " + i + ", j : " + j);
+        if (copiedGrid[k][i].value !== 0) {
+          if (
+            copiedGrid[k][j].value > 0 &&
+            copiedGrid[k][j].value !== copiedGrid[k][i].value
+          ) {
             break;
-          } else if (row[k][i].value === row[k][j].value) {
-            row[k][i].value = row[k][i].value + row[k][j].value;
-            row[k][i].active = "combined";
-            row[k][j].value = 0;
+          } else if (copiedGrid[k][i].value === copiedGrid[k][j].value) {
+            copiedGrid[k][i].value =
+              copiedGrid[k][i].value + copiedGrid[k][j].value;
+            copiedGrid[k][i].active = "combined";
+            copiedGrid[k][j].value = 0;
+
+            copiedGrid[k][i].position.x = k;
+            copiedGrid[k][i].position.y = i;
             break;
           }
         }
       }
     }
-    const blockWithValues: any[] = [];
+    const blocksWithValues: any[] = [];
     const blocksWithoutValues: any[] = [];
-    for (let i = 0; i < row.length; i++) {
-      if (row[k][i].value > 0) {
-        blockWithValues.push(row[k][i]);
+    for (let i = 0; i < copiedGrid.length; i++) {
+      if (copiedGrid[k][i].value > 0) {
+        blocksWithValues.push(copiedGrid[k][i]);
       } else {
-        blocksWithoutValues.push(row[k][i]);
+        // copiedGrid[k][i].newPosition.x = k;
+        // copiedGrid[k][i].newPosition.y = i;
+        blocksWithoutValues.push(copiedGrid[k][i]);
       }
     }
     const newArray = [];
-    newArray.push(...blocksWithoutValues, ...blockWithValues);
+    // console.log("blocksWithValues");
+    // console.log(blocksWithValues);
+
+    // console.log("blocksWithoutValues");
+
+    // console.log(blocksWithoutValues);
+
+    newArray.push(...blocksWithoutValues, ...blocksWithValues);
     newWholeArray.push(newArray);
   }
 
