@@ -56,7 +56,7 @@ func init() {
 	fmt.Println("Collection instance created!")
 }
 
-// GetAllTask get all the task route
+// G etAllTask get all the task route
 func GetAllTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
