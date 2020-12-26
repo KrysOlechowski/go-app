@@ -18,7 +18,7 @@ import (
 
 // var connection = os.Getenv("MONGO_CONNECTION_STRING")
 
-var connectionString = "mongodb+srv://projecttest:projectpass@cluster0.quzdq.mongodb.net/test?retryWrites=true&w=majority"
+var connectionString = connection
 
 // Database Name
 const dbName = "test"
