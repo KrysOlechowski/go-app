@@ -3,6 +3,7 @@ import { combineBlocks, addRandomBlocks } from "../../logic/blocks-logic";
 import styled from "styled-components/macro";
 import * as _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
+import { Blocks } from "./blocks";
 type Props = {};
 
 export const Game: FC<Props> = () => {
@@ -42,8 +43,8 @@ export const Game: FC<Props> = () => {
           y: 2,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 0,
+          y: 2,
         },
       },
       {
@@ -54,34 +55,34 @@ export const Game: FC<Props> = () => {
           y: 3,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 0,
+          y: 3,
         },
       },
     ],
     [
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 1,
           y: 0,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 1,
+          y: 0,
         },
       },
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 1,
           y: 1,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 1,
+          y: 1,
         },
       },
       {
@@ -92,8 +93,8 @@ export const Game: FC<Props> = () => {
           y: 2,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 1,
+          y: 2,
         },
       },
       {
@@ -104,8 +105,8 @@ export const Game: FC<Props> = () => {
           y: 3,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 1,
+          y: 3,
         },
       },
     ],
@@ -118,32 +119,32 @@ export const Game: FC<Props> = () => {
           y: 0,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 2,
+          y: 0,
         },
       },
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 2,
           y: 1,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 2,
+          y: 1,
         },
       },
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 2,
           y: 2,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 2,
+          y: 2,
         },
       },
       {
@@ -154,8 +155,8 @@ export const Game: FC<Props> = () => {
           y: 3,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 2,
+          y: 3,
         },
       },
     ],
@@ -168,8 +169,8 @@ export const Game: FC<Props> = () => {
           y: 0,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 3,
+          y: 0,
         },
       },
       {
@@ -180,32 +181,32 @@ export const Game: FC<Props> = () => {
           y: 1,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 3,
+          y: 1,
         },
       },
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 3,
           y: 2,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 3,
+          y: 2,
         },
       },
       {
-        value: 0,
+        value: 2,
         active: "old",
         position: {
           x: 3,
           y: 3,
         },
         newPosition: {
-          x: null,
-          y: null,
+          x: 3,
+          y: 3,
         },
       },
     ],
@@ -218,8 +219,8 @@ export const Game: FC<Props> = () => {
           .then((grid: any) => {
             console.log("we have a move + grid :");
             console.log(grid);
-            // const withRandom = addRandomBlocks(grid);
-            const withRandom = grid;
+            const withRandom = addRandomBlocks(grid);
+            // const withRandom = grid;
             setGameGrid(withRandom);
             setIsLoading(false);
           })
@@ -230,7 +231,7 @@ export const Game: FC<Props> = () => {
       }
       setIsLoading(true);
     },
-    [gameGrid, combineBlocks, isLoading, addRandomBlocks]
+    [gameGrid, isLoading]
   );
 
   useEffect(() => {
@@ -248,16 +249,16 @@ export const Game: FC<Props> = () => {
   }, [onKeyPressed]);
 
   return (
-    <>
-      <h1 onClick={() => console.log(gameGrid)}>Game Component</h1>
-      <div style={{ height: "100px" }}>
-        <h1>{isLoading ? "Loading..." : ""}</h1>
-      </div>
+    <div style={{ display: "flex" }}>
+      {/* <div style={{ width: "50%" }}>
+        <Blocks />
+      </div> */}
+
       <div style={{ border: "1px solid red", width: "500px", height: "500px" }}>
         {gameGrid.map((row, i) => {
           return (
             <Row key={uuidv4()}>
-              {row.map((el, i) => {
+              {row.map((el: any, i: number) => {
                 return (
                   <Block key={uuidv4()} active={el.active}>
                     <div className="value">{el.value}</div>
@@ -276,7 +277,7 @@ export const Game: FC<Props> = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

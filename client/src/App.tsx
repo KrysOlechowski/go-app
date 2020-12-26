@@ -6,7 +6,7 @@ import { Game } from "./components/game";
 function App() {
   return (
     <div className="App">
-      <Main />
+      {/* <Main /> */}
       <Game />
     </div>
   );

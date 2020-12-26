@@ -1,4 +1,7 @@
 import * as _ from "lodash";
+//make grid
+//1 set prev position
+//2 combine blocks
 
 export const combineBlocks = (key: string, gameGrid: any) => {
   const prevGrid = _.cloneDeep(gameGrid);
@@ -7,6 +10,8 @@ export const combineBlocks = (key: string, gameGrid: any) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       currGrid = setPrevPositions(currGrid);
+      // console.log("currGrid after setPrevPositions :");
+      // console.log(currGrid);
       if (key === "ArrowRight") {
         grid = moveWholeBlocksToRight(currGrid);
         console.log("right");
@@ -72,16 +77,16 @@ const moveBlocksDown = (gameGrid: any) => {
 };
 
 const setPrevPositions = (gameGrid: any) => {
-  const copiedGrid: any = _.cloneDeep(gameGrid);
+  const grid: any = _.cloneDeep(gameGrid);
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if (copiedGrid[i][j].value > 0) {
-        copiedGrid[i][j].position.x = copiedGrid[i][j].newPosition.x;
-        copiedGrid[i][j].position.y = copiedGrid[i][j].newPosition.y;
+      if (grid[i][j].value > 0) {
+        grid[i][j].position.x = grid[i][j].newPosition.x;
+        grid[i][j].position.y = grid[i][j].newPosition.y;
       }
     }
   }
-  return copiedGrid;
+  return grid;
 };
 
 const setNewPositions = (grid: any) => {
@@ -103,7 +108,7 @@ export const moveWholeBlocksToRight = (grid: any) => {
   const copiedGrid: any = _.cloneDeep(grid);
   let newWholeArray = [];
   for (let k = 0; k < 4; k++) {
-    for (let i = copiedGrid.length - 1; i >= 0; i--) {
+    for (let i = copiedGrid.length - 1; i > 0; i--) {
       copiedGrid[k][i].active = "old";
       for (let j = i - 1; j >= 0; j--) {
         // console.log("k : " + k + ", i : " + i + ", j : " + j);
@@ -119,8 +124,8 @@ export const moveWholeBlocksToRight = (grid: any) => {
             copiedGrid[k][i].active = "combined";
             copiedGrid[k][j].value = 0;
 
-            copiedGrid[k][i].position.x = k;
-            copiedGrid[k][i].position.y = i;
+            copiedGrid[k][j].position.x = k;
+            copiedGrid[k][j].position.y = i + "l";
             break;
           }
         }
@@ -217,6 +222,14 @@ export const addRandomBlocks = (grid: any) => {
   grid[randomEmptyBlock.row][randomEmptyBlock.index] = {
     value: 2,
     active: "new",
+    position: {
+      x: randomEmptyBlock.row,
+      y: randomEmptyBlock.index,
+    },
+    newPosition: {
+      x: randomEmptyBlock.row,
+      y: randomEmptyBlock.index,
+    },
   };
 
   return grid;
